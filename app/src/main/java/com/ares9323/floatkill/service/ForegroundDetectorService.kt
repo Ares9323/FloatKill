@@ -299,22 +299,55 @@ class ForegroundDetectorService : AccessibilityService() {
     )
 
     private fun findCardForLabel(root: AccessibilityNodeInfo, label: String): DismissTarget? {
-        // 1) Search by text — exact match on labels.
-        val byText = root.findAccessibilityNodeInfosByText(label)
-        for (n in byText) {
-            val target = findDismissTargetUpwards(n)
-            if (target != null) return target
-        }
-        // 2) Manual traversal — OEMs (Samsung) attach the label to the card's
-        //    contentDescription rather than to a child TextView.
+        // Gather every node whose visible text or contentDescription matches the label.
+        val candidates = mutableListOf<AccessibilityNodeInfo>()
+        candidates.addAll(root.findAccessibilityNodeInfosByText(label))
         val stack = ArrayDeque<AccessibilityNodeInfo>()
         stack.addLast(root)
         while (stack.isNotEmpty()) {
             val n = stack.removeLast()
             val cd = n.contentDescription?.toString().orEmpty()
-            if (cd.contains(label, ignoreCase = true)) {
-                val target = findDismissTargetUpwards(n)
-                if (target != null) return target
+            if (cd.contains(label, ignoreCase = true)) candidates.add(n)
+            for (i in 0 until n.childCount) {
+                val c = try { n.getChild(i) } catch (_: Throwable) { null } ?: continue
+                stack.addLast(c)
+            }
+        }
+
+        for (n in candidates) {
+            // Strategy A — Samsung One UI: the card node itself (or an ancestor)
+            // exposes a custom dismiss action (label="Close").
+            findDismissTargetUpwards(n)?.let { return it }
+
+            // Strategy B — AOSP / LG UX: the card holds a separate clickable
+            // child whose id ends with ":id/dismiss_task" or whose
+            // contentDescription is a localised "dismiss" verb. Find the card
+            // root first (closest clickable ancestor or just the parent), then
+            // hunt for the dismiss button inside.
+            val cardRoot = firstClickableAncestor(n) ?: n.parent ?: continue
+            findDismissButtonInCard(cardRoot)?.let { btn ->
+                return DismissTarget(btn, AccessibilityNodeInfo.ACTION_CLICK, "dismiss_task")
+            }
+        }
+        return null
+    }
+
+    /**
+     * Searches [cardRoot]'s subtree for a clickable "dismiss this task" button,
+     * matched either by its resource id (AOSP `:id/dismiss_task`) or by a
+     * localised content description ("Dismiss" / "Ignora" / "Close" / …).
+     */
+    private fun findDismissButtonInCard(cardRoot: AccessibilityNodeInfo): AccessibilityNodeInfo? {
+        val stack = ArrayDeque<AccessibilityNodeInfo>()
+        stack.addLast(cardRoot)
+        while (stack.isNotEmpty()) {
+            val n = stack.removeLast()
+            if (n.isClickable) {
+                val id = n.viewIdResourceName.orEmpty()
+                val cd = n.contentDescription?.toString().orEmpty()
+                val idMatches = DISMISS_BUTTON_ID_SUFFIXES.any { id.endsWith(it) }
+                val cdMatches = DISMISS_BUTTON_CD_LABELS.any { cd.equals(it, ignoreCase = true) }
+                if (idMatches || cdMatches) return n
             }
             for (i in 0 until n.childCount) {
                 val c = try { n.getChild(i) } catch (_: Throwable) { null } ?: continue
@@ -674,6 +707,28 @@ class ForegroundDetectorService : AccessibilityService() {
             "关闭",
             "閉じる",
             "닫기",
+            "Закрыть"
+        )
+
+        // AOSP / LG UX expose dismiss as a separate child button under the card.
+        private val DISMISS_BUTTON_ID_SUFFIXES = listOf(
+            ":id/dismiss_task",
+            ":id/dismiss"
+        )
+
+        private val DISMISS_BUTTON_CD_LABELS = listOf(
+            "Dismiss",
+            "Ignora",          // Italian
+            "Close",
+            "Chiudi",
+            "Cerrar",
+            "Fermer",
+            "Schließen",
+            "Fechar",
+            "관리 닫기",
+            "닫기",
+            "关闭",
+            "閉じる",
             "Закрыть"
         )
 
