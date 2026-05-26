@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Status banner -->
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="#11000000"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:text="…"
+            tools:ignore="HardcodedText" />
+
+        <!-- Required permissions -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_required"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/overlayState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:layout_marginBottom="4dp"
+            android:text="…"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnOpenOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_open_overlay"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/accessibilityState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:layout_marginBottom="4dp"
+            android:text="…"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnOpenAccessibility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_open_accessibility"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Service toggle -->
+        <TextView
+            android:id="@+id/runningState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:layout_marginBottom="4dp"
+            android:text="…"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/toggleService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start_service"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/qs_tile_hint"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Kill mode selector -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_kill_mode"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:layout_marginBottom="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/kill_mode_description"
+            android:textAppearance="?attr/textAppearanceCaption"
+            android:layout_marginBottom="8dp" />
+
+        <RadioGroup
+            android:id="@+id/killModeGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp">
+
+            <RadioButton
+                android:id="@+id/modeRecents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kill_mode_recents" />
+
+            <RadioButton
+                android:id="@+id/modeSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/kill_mode_settings" />
+
+        </RadioGroup>
+
+    </LinearLayout>
+</ScrollView>

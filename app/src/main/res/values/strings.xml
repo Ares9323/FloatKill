@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FloatKill</string>
+
+    <!-- accessibility -->
+    <string name="accessibility_service_label">FloatKill</string>
+    <string name="accessibility_service_description">Tracks the foreground app and navigates the App info or Recents screen to perform the kill via Accessibility. No app content is captured.</string>
+
+    <!-- main activity -->
+    <string name="section_required">Required permissions</string>
+
+    <string name="status_ready">Ready · strategy: %1$s</string>
+    <string name="status_setup_required">Setup incomplete</string>
+    <string name="overlay_granted">Overlay: ✓ granted</string>
+    <string name="overlay_missing">Overlay: ✗ NOT granted</string>
+    <string name="accessibility_enabled">Accessibility: ✓ active</string>
+    <string name="accessibility_disabled">Accessibility: ✗ inactive</string>
+    <string name="service_running">Floating button: running</string>
+    <string name="service_stopped">Floating button: stopped</string>
+    <string name="start_service">Start floating button</string>
+    <string name="stop_service">Stop floating button</string>
+    <string name="btn_open_accessibility">Open Accessibility settings</string>
+    <string name="btn_open_overlay">Open Overlay settings</string>
+    <string name="qs_tile_hint">Tip: add the FloatKill tile to Quick Settings to toggle from the notification shade.</string>
+
+    <!-- Kill mode selector -->
+    <string name="section_kill_mode">Kill mode</string>
+    <string name="kill_mode_description">Recents: fast and unobtrusive, but apps with foreground services (WhatsApp, Spotify…) may survive. Settings: guaranteed kill, but briefly shows the App info screen.</string>
+    <string name="kill_mode_recents">Recents (fast, soft kill)</string>
+    <string name="kill_mode_settings">Settings (slow, hard kill)</string>
+
+    <!-- notification -->
+    <string name="floating_channel_name">Floating button</string>
+    <string name="floating_channel_desc">Persistent notification for the FloatKill floating button</string>
+    <string name="notif_title">FloatKill active</string>
+    <string name="notif_text">Tap the floating button to kill the foreground app.</string>
+    <string name="notif_stop">Stop</string>
+
+    <!-- floating menu -->
+    <string name="menu_kill_only">Kill only</string>
+    <string name="menu_stop_service">Stop service</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- QS tile -->
+    <string name="tile_label">FloatKill</string>
+
+    <!-- runtime errors -->
+    <string name="no_kill_permission">No kill strategy available. Enable Accessibility.</string>
+    <string name="kill_failed">Kill failed for %1$s</string>
+    <string name="kill_failed_detail">Kill failed for %1$s — %2$s</string>
+    <string name="no_foreground_detected">No foreground app detected. Is Accessibility enabled?</string>
+    <string name="refusing_self">Cannot kill self.</string>
+    <string name="refusing_system">Refusing to kill system package (%1$s)</string>
+    <string name="error_overlay_permission">Overlay permission missing.</string>
+    <string name="no_browser">No browser available</string>
+</resources>

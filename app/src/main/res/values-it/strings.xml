@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FloatKill</string>
+
+    <!-- accessibility -->
+    <string name="accessibility_service_label">FloatKill</string>
+    <string name="accessibility_service_description">Rileva l\'app in primo piano e naviga la schermata App info o Recents per eseguire il kill via Accessibilità. Nessun contenuto delle app viene letto.</string>
+
+    <!-- main activity -->
+    <string name="section_required">Permessi richiesti</string>
+
+    <string name="status_ready">Pronto · strategia: %1$s</string>
+    <string name="status_setup_required">Configurazione incompleta</string>
+    <string name="overlay_granted">Overlay: ✓ concesso</string>
+    <string name="overlay_missing">Overlay: ✗ NON concesso</string>
+    <string name="accessibility_enabled">Accessibilità: ✓ attiva</string>
+    <string name="accessibility_disabled">Accessibilità: ✗ disattiva</string>
+    <string name="service_running">Bottone fluttuante: in esecuzione</string>
+    <string name="service_stopped">Bottone fluttuante: fermo</string>
+    <string name="start_service">Avvia bottone fluttuante</string>
+    <string name="stop_service">Ferma bottone fluttuante</string>
+    <string name="btn_open_accessibility">Apri impostazioni Accessibilità</string>
+    <string name="btn_open_overlay">Apri impostazioni Overlay</string>
+    <string name="qs_tile_hint">Suggerimento: aggiungi il tile FloatKill alle Impostazioni rapide per attivare/disattivare dal pannello notifiche.</string>
+
+    <!-- Kill mode selector -->
+    <string name="section_kill_mode">Modalità kill</string>
+    <string name="kill_mode_description">Recents: veloce e poco invasivo, ma le app con foreground service (WhatsApp, Spotify…) possono sopravvivere. Settings: kill garantito, ma vedi brevemente la schermata App info.</string>
+    <string name="kill_mode_recents">Recents (veloce, soft kill)</string>
+    <string name="kill_mode_settings">Settings (lento, hard kill)</string>
+
+    <!-- notification -->
+    <string name="floating_channel_name">Bottone fluttuante</string>
+    <string name="floating_channel_desc">Notifica persistente del bottone fluttuante FloatKill</string>
+    <string name="notif_title">FloatKill attivo</string>
+    <string name="notif_text">Tocca il bottone fluttuante per killare l\'app in primo piano.</string>
+    <string name="notif_stop">Ferma</string>
+
+    <!-- floating menu -->
+    <string name="menu_kill_only">Solo kill</string>
+    <string name="menu_stop_service">Ferma servizio</string>
+    <string name="menu_settings">Impostazioni</string>
+
+    <!-- QS tile -->
+    <string name="tile_label">FloatKill</string>
+
+    <!-- runtime errors -->
+    <string name="no_kill_permission">Nessuna strategia kill disponibile. Attiva l\'Accessibilità.</string>
+    <string name="kill_failed">Kill fallito per %1$s</string>
+    <string name="kill_failed_detail">Kill fallito per %1$s — %2$s</string>
+    <string name="no_foreground_detected">App in primo piano non rilevata. L\'Accessibilità è attiva?</string>
+    <string name="refusing_self">Non posso killare me stesso.</string>
+    <string name="refusing_system">Non killo pacchetti di sistema (%1$s)</string>
+    <string name="error_overlay_permission">Permesso overlay mancante.</string>
+    <string name="no_browser">Nessun browser disponibile</string>
+</resources>
